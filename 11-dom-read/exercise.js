@@ -1,17 +1,4 @@
 // 11-dom-read — your work goes in this file.
-//
-// The lesson is example.js:   npm run open 11
-// See your own page with:     npm run open 11 exercise
-// Check your work with:       npm test 11
-//
-// exercise.html is written for you and must not be edited.
-//
-// These functions read the page. `document` is always there — in the browser
-// because the browser provides it, and in the tests because they load
-// exercise.html for you first. You write exactly the code you would write for
-// a real page.
-//
-// The first four are started for you. The LAST one has no code — you write it.
 
 /**
  * The text of the page's main heading.
@@ -20,8 +7,7 @@
  * @returns {string}
  */
 export function pageHeading() {
-  // TODO: querySelector the h1, then read its textContent.
-  throw new Error("pageHeading is not written yet");
+  return document.querySelector("h1").textContent;
 }
 
 /**
@@ -31,52 +17,43 @@ export function pageHeading() {
  * @returns {number}
  */
 export function productCount() {
-  // TODO: querySelectorAll gives you all of them. It has a length.
-  throw new Error("productCount is not written yet");
+  return document.querySelectorAll(".card").length;
 }
 
 /**
  * The name in every card, in the order they appear.
- * productNames() -> ["Notebook", "Backpack", "Pen", "Desk lamp", "Calculator"]
- *
- * Each card holds its name in an <h3>.
  *
  * @returns {string[]}
  */
 export function productNames() {
-  // TODO: querySelectorAll, Array.from, then map. A NodeList has no .map.
-  throw new Error("productNames is not written yet");
+  return Array.from(document.querySelectorAll(".card h3")).map(
+    (h3) => h3.textContent
+  );
 }
 
 /**
  * The price text shown on the card with that name.
  * priceOf("Pen") -> "15 EGP"
- * priceOf("Nothing") -> null, because there is no such card
+ * priceOf("Nothing") -> null
  *
  * @param {string} name
  * @returns {string|null}
  */
 export function priceOf(name) {
-  // TODO: find the card whose h3 matches, then read its .price.
-  // Remember to return null when nothing matches.
-  throw new Error("priceOf is not written yet");
+  const card = Array.from(document.querySelectorAll(".card")).find(
+    (c) => c.querySelector("h3").textContent === name
+  );
+  return card ? card.querySelector(".price").textContent : null;
 }
 
 /**
- * Now you write the whole function.
+ * Names of the cards that have the class `sold-out`, in page order.
+ * soldOutNames() -> ["Backpack", "Calculator"]
  *
- * Write a function called `soldOutNames`.
- *
- *   Parameters: none.
- *   Returns:    an array of the names on the cards that have the class
- *               `sold-out`, in the order they appear on the page.
- *
- *   soldOutNames() -> ["Backpack", "Calculator"]
- *
- * You can do this with one selector, or by filtering on
- * `classList.contains("sold-out")`. Either is fine.
- *
- * Remember `export`.
+ * @returns {string[]}
  */
-
-// TODO: write soldOutNames here.
+export function soldOutNames() {
+  return Array.from(document.querySelectorAll(".card.sold-out h3")).map(
+    (h3) => h3.textContent
+  );
+}
